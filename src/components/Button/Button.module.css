@@ -1,0 +1,19 @@
+.Button {
+    text-transform: uppercase;
+    background-color: cornflowerblue;
+    color: white;
+    align-self: flex-start;
+    line-height: 2rem;
+    text-align: center;
+    width: 150px;
+    font-size: 0.8rem;
+    margin-top: 0.8rem;
+}
+
+.Blue {
+    background-color: blue;
+}
+
+.Red {
+    background-color: red;
+}

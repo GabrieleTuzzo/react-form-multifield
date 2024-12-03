@@ -1,0 +1,58 @@
+.Card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 100%;
+}
+
+.CardImg {
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.CardBody {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    padding-top: 0;
+}
+
+.CardTitle {
+    font-size: 1.4rem;
+    margin: 0.8rem 0;
+}
+
+.ButtonWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.TagList {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.Tag {
+    line-height: 1.6rem;
+    text-align: center;
+    padding: 0 1rem;
+    border-radius: 12px;
+    color: white;
+    background-color: brown;
+}
+
+.Tag.html {
+    background-color: cornflowerblue;
+}
+
+.Tag.css {
+    background-color: mediumorchid;
+}
+
+.Tag.js {
+    background-color: mediumseagreen;
+}
+
+.Tag.php {
+    background-color: mediumturquoise;
+}
