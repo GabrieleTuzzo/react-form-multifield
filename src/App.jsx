@@ -20,19 +20,17 @@ function App() {
     });
 
     useEffect(() => {
-        document.body.classList.toggle('no-scroll');
-        return () => document.body.classList.remove('no-scroll');
+        if (showOverlay) {
+            document.body.classList.add('no-scroll');
+        } else {
+            document.body.classList.remove('no-scroll');
+        }
     }, [showOverlay]);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = (formData) => {
         const newPost = {
             id: drawnPosts.length + 1,
-            title: postName,
-            published: true,
-            tags: [],
-            image: '',
-            content: '',
+            ...formData,
         };
 
         setPosts([...drawnPosts, newPost]);
