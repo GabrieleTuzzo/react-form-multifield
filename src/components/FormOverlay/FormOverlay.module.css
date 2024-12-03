@@ -10,8 +10,15 @@
 }
 
 .OverlayBody {
+    display: flex;
+    flex-flow: column;
+    gap: 0.5rem;
     background-color: white;
     color: black;
     padding: 10rem;
     border-radius: 1rem;
+}
+
+.Width_100 {
+    width: 100%;
 }

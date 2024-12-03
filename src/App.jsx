@@ -10,14 +10,19 @@ function App() {
     const [drawnPosts, setPosts] = useState(posts);
     const [showOverlay, setShowOverlay] = useState(false);
     const [postName, setPostName] = useState('');
+    const [tags, setTags] = useState([]);
 
-    const tags = [];
-    const publishedPosts = drawnPosts.filter((post) => post.published === true);
-    publishedPosts.forEach((post) => {
-        post.tags.forEach((tag) => {
-            !tags.includes(tag) && tags.push(tag);
+    useEffect(() => {
+        const newTags = [];
+        drawnPosts.forEach((post) => {
+            if (post.published) {
+                post.tags.forEach((tag) => {
+                    !newTags.includes(tag) && newTags.push(tag);
+                });
+            }
         });
-    });
+        setTags(newTags);
+    }, [drawnPosts]);
 
     useEffect(() => {
         if (showOverlay) {
@@ -34,7 +39,6 @@ function App() {
         };
 
         setPosts([...drawnPosts, newPost]);
-        setPostName('');
         setShowOverlay(false);
     };
 
@@ -80,9 +84,8 @@ function App() {
                         {drawnPosts.map((post) => {
                             return (
                                 post.published && (
-                                    <div className="col-6">
+                                    <div key={post.id} className="col-6">
                                         <Card
-                                            key={post.id}
                                             title={post.title}
                                             image={post.image}
                                             content={post.content}

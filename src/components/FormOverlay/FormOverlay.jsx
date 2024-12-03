@@ -6,12 +6,12 @@ export default function FormOverlay({ handleSubmit }) {
         title: '',
         image: '',
         content: '',
-        tags: [],
+        tags: '',
         published: false,
     });
 
     function handleFormData(event) {
-        const value =
+        let value =
             event.target.type === 'checkbox'
                 ? event.target.checked
                 : event.target.value;
@@ -24,7 +24,16 @@ export default function FormOverlay({ handleSubmit }) {
 
     function onSubmit(event) {
         event.preventDefault();
+        formData.tags = getTagsArray(formData.tags);
         handleSubmit(formData);
+    }
+
+    function getTagsArray(string) {
+        return string
+            .toLowerCase()
+            .trim()
+            .split(' ')
+            .filter((tag) => tag !== '');
     }
 
     return (
@@ -34,6 +43,7 @@ export default function FormOverlay({ handleSubmit }) {
                     <label>
                         <span>Titolo del Post: </span>
                         <input
+                            className={style.Width_100}
                             type="text"
                             onChange={handleFormData}
                             value={formData.title}
@@ -43,6 +53,7 @@ export default function FormOverlay({ handleSubmit }) {
                     <label>
                         <span>Immagine (Link): </span>
                         <input
+                            className={style.Width_100}
                             type="text"
                             onChange={handleFormData}
                             value={formData.image}
@@ -52,10 +63,21 @@ export default function FormOverlay({ handleSubmit }) {
                     <label>
                         <span>Contenuto: </span>
                         <input
+                            className={style.Width_100}
                             type="text"
                             onChange={handleFormData}
                             value={formData.content}
                             name="content"
+                        />
+                    </label>
+                    <label>
+                        <span>Tags: </span>
+                        <input
+                            className={style.Width_100}
+                            type="text"
+                            onChange={handleFormData}
+                            value={formData.tags}
+                            name="tags"
                         />
                     </label>
                     <label>
