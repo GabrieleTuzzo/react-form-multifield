@@ -2,10 +2,13 @@ import './App.css';
 import Card from './components/Card/Card';
 import Footer from './components/Footer/Footer';
 import posts from './data/posts';
-import { useState } from 'react';
+import Button from './components/Button/Button';
+import FormOverlay from './components/FormOverlay/FormOverlay';
+import { useState, useEffect } from 'react';
 
 function App() {
     const [drawnPosts, setPosts] = useState(posts);
+    const [showOverlay, setShowOverlay] = useState(false);
     const [postName, setPostName] = useState('');
 
     const tags = [];
@@ -15,6 +18,11 @@ function App() {
             !tags.includes(tag) && tags.push(tag);
         });
     });
+
+    useEffect(() => {
+        document.body.classList.toggle('no-scroll');
+        return () => document.body.classList.remove('no-scroll');
+    }, [showOverlay]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -28,6 +36,8 @@ function App() {
         };
 
         setPosts([...drawnPosts, newPost]);
+        setPostName('');
+        setShowOverlay(false);
     };
 
     const handleDelete = (id) => {
@@ -35,9 +45,24 @@ function App() {
         setPosts([...updatedPosts]);
     };
 
+    const handleOverlay = () => {
+        setShowOverlay(true);
+    };
+
+    const changePostName = (e) => {
+        setPostName(e.target.value);
+    };
+
     return (
         <>
             <main>
+                {showOverlay && (
+                    <FormOverlay
+                        title={postName}
+                        handleSubmit={handleSubmit}
+                        setTitle={changePostName}
+                    />
+                )}
                 <div className="container">
                     <div className="row">
                         <div className="col">
@@ -49,22 +74,10 @@ function App() {
                                     return <span key={i}>{tag}</span>;
                                 })}
                             </div>
-                            <form
-                                onSubmit={
-                                    postName !== ''
-                                        ? handleSubmit
-                                        : function () {}
-                                }
-                            >
-                                <input
-                                    type="text"
-                                    placeholder={'Titolo post...'}
-                                    onChange={(e) => {
-                                        setPostName(e.target.value);
-                                    }}
-                                />
-                                <button>Invia</button>
-                            </form>
+                            <Button
+                                value={'Crea Post'}
+                                onClick={handleOverlay}
+                            ></Button>
                         </div>
                         {drawnPosts.map((post) => {
                             return (

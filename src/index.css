@@ -61,6 +61,7 @@ main {
 .tags-container {
     display: flex;
     gap: 1rem;
+    align-items: center;
 }
 
 .tags-container > * {
@@ -73,4 +74,10 @@ main {
 .main-tags-wrap {
     display: flex;
     justify-content: space-between;
+}
+
+/* Utility */
+
+.no-scroll {
+    overflow: hidden;
 }
