@@ -9,7 +9,6 @@ import { useState, useEffect } from 'react';
 function App() {
     const [drawnPosts, setPosts] = useState(posts);
     const [showOverlay, setShowOverlay] = useState(false);
-    const [postName, setPostName] = useState('');
     const [tags, setTags] = useState([]);
 
     useEffect(() => {
@@ -51,20 +50,10 @@ function App() {
         setShowOverlay(true);
     };
 
-    const changePostName = (e) => {
-        setPostName(e.target.value);
-    };
-
     return (
         <>
             <main>
-                {showOverlay && (
-                    <FormOverlay
-                        title={postName}
-                        handleSubmit={handleSubmit}
-                        setTitle={changePostName}
-                    />
-                )}
+                {showOverlay && <FormOverlay handleSubmit={handleSubmit} />}
                 <div className="container">
                     <div className="row">
                         <div className="col">
